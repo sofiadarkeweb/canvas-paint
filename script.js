@@ -13,7 +13,9 @@ window.addEventListener("load", () => {
 	canvas.height = window.innerHeight;
 	canvas.width = window.innerWidth;
     }
-    resizeCanvas();
+	resizeCanvas();
+	
+
 
 	//variables
 	let painting = false;
@@ -45,6 +47,8 @@ window.addEventListener("load", () => {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 	}
 
+	
+	  
 
 
 	//eventlisteners
@@ -52,6 +56,10 @@ window.addEventListener("load", () => {
 	canvas.addEventListener("mousedown", startPosition);
 	canvas.addEventListener("mouseup", finishedPosition);
 	canvas.addEventListener("mousemove", draw);
+	canvas.addEventListener("touchstart", startPosition);
+	canvas.addEventListener("touchend", finishedPosition);
+	canvas.addEventListener("touchmove", draw);
+	
 	window.addEventListener("resize", resizeCanvas);
 	clearButton.addEventListener("click", clearCanvas);
 	stroke_weight.addEventListener("change", function(){
