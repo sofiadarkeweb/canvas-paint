@@ -4,6 +4,7 @@ body {
 	box-sizing: border-box;
 	background: #adefd1ff;
 	font-family: "Roboto", Helvetica, sans-serif;
+	overflow: hidden;
 }
 
 #canvas {
@@ -21,25 +22,9 @@ body {
 	margin-left: 100px;
 	margin-top: 20px;
 	position: fixed;
-}
-/*animation: animated-text 4s steps(29, end) 1s 1 normal both;
-
-
-/*
-.title {
-	animation: animated-text 4s steps(29, end) 1s 1 normal both;
+	pointer-events: none;
 }
 
- text animation 
-
-@keyframes animated-text {
-	from {
-		width: 0;
-	}
-	to {
-		width: 200px;
-	}
-}*/
 
 #colors {
 	position: absolute;
@@ -143,7 +128,7 @@ input[type="range"]::-webkit-slider-thumb {
 	border: none;
 	height: 20px;
 	width: 20px;
-	border-radius: 20px;
-	background: gray;
+	border-radius: 0px;
+	background: rgb(77, 77, 77);
 	cursor: pointer;
 }
