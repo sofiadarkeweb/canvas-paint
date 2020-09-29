@@ -65,10 +65,13 @@ window.addEventListener("load", () => {
 
 	function finishedPosition() {
 		painting = false;
+		ctx.closePath()
 		ctx.beginPath();
 	}
 
 	function draw(e) {
+		//e.preventDefault()
+		console.log(e.type)
 		if (!painting) return;
 		ctx.lineWidth = strokeWeight.value;
 		ctx.lineCap = "round";
@@ -76,7 +79,8 @@ window.addEventListener("load", () => {
 		ctx.lineTo(e.pageX, e.pageY);
 		ctx.stroke();
 		ctx.beginPath();
-		ctx.moveTo(e.clientX, e.clientY);
+		ctx.moveTo(e.pageX, e.pageY);
+		ctx.closePath();
 	}
 
 	//eventlisteners
