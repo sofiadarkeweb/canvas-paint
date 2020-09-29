@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="reset.css" />
 		<link rel="stylesheet" href="style.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 		<title>Canvas Drawing</title>
 	</head>
 
@@ -14,13 +15,11 @@
 		<main>
 			<ul id="colors"></ul>
 			<button class="clear">X</button>
-			<div>
-				<input class="line_width" type="number"value="30"></input>
-			</div>
+			
 			<div class="magic"></div>
-			<!-- <div>
-				<input class="line_slider" type="range" min="1" min="100" value="30"></input>
-			</div>!-->
+			<div class="slidecontainer">
+				<input class="lineSlider" type="range" min="1" max="100" value="30"></input>
+			</div>
 		</main>
 		
 
@@ -35,4 +34,8 @@
 	<script src="script.js"></script>
 </html>
 
-<!-- width="1000" height="600" !-->
+<!-- width="1000" height="600" 
+	
+	<div>
+				<input class="line_width" type="number"value="30"></input>
+			</div>!-->

@@ -1,21 +1,58 @@
-
-
-
 //}
-
 window.addEventListener("load", () => {
 	const canvas = document.querySelector("#canvas");
 	const ctx = canvas.getContext("2d");
-	const stroke_weight = document.querySelector('.line_width');
+	const strokeWeight = document.querySelector(".lineSlider");
+	let rainbowColor = document.querySelector(".magic");
+	let hue = 0;
+	let stroke = 0;
+	let brushColour, rainbowPressed;
 
-	//window.addEventListener("resize", resizeCanvas);
+	//color divs
+	const colours = ["#007892", "#9d65c9", "#ff427f", "#fc8210", "yellow"];
+	const colourDivs = [];
+	for (const colour of colours) {
+		const colourDiv = document.createElement("li");
+		document.querySelector("ul").appendChild(colourDiv);
+		colourDiv.classList.add("colour");
+		colourDiv.style.backgroundColor = colour;
+		colourDiv.addEventListener("click", changeColour);
+		colourDivs.push(colourDiv);
+	}
+
+	function changeColour() {
+		rainbowPressed = false;
+		//window.removeEventListener('mousemove', increment)
+		brushColour = this.style.backgroundColor;
+	}
+
+	//resize window
 	function resizeCanvas() {
-	canvas.height = window.innerHeight;
-	canvas.width = window.innerWidth;
-    }
+		canvas.height = window.innerHeight;
+		canvas.width = window.innerWidth;
+	}
 	resizeCanvas();
-	
 
+	//rainbow color
+	function rainbowColorFunction() {
+		rainbowPressed = true;
+		ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+		window.addEventListener("mousemove", increment);
+		//colourDivs.forEach(div => div.removeEventListener('click', changeColour))
+	}
+
+	function increment() {
+		ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+		hue++;
+		if (hue >= 360) {
+			hue = 0;
+		}
+	}
+
+	//clear canvas
+	function clearCanvas() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+	}
 
 	//variables
 	let painting = false;
@@ -33,23 +70,14 @@ window.addEventListener("load", () => {
 
 	function draw(e) {
 		if (!painting) return;
-		ctx.lineWidth = stroke_weight.value;
+		ctx.lineWidth = strokeWeight.value;
 		ctx.lineCap = "round";
-
-		ctx.strokeStyle = brushColour;
-		ctx.lineTo(e.clientX, e.clientY);
+		if (!rainbowPressed) ctx.strokeStyle = brushColour;
+		ctx.lineTo(e.pageX, e.pageY);
 		ctx.stroke();
 		ctx.beginPath();
 		ctx.moveTo(e.clientX, e.clientY);
 	}
-
-	function clearCanvas() {
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-	}
-
-	
-	  
-
 
 	//eventlisteners
 
@@ -59,41 +87,31 @@ window.addEventListener("load", () => {
 	canvas.addEventListener("touchstart", startPosition);
 	canvas.addEventListener("touchend", finishedPosition);
 	canvas.addEventListener("touchmove", draw);
-	
+
 	window.addEventListener("resize", resizeCanvas);
 	clearButton.addEventListener("click", clearCanvas);
-	stroke_weight.addEventListener("change", function(){
-		stroke.value
+	strokeWeight.addEventListener("change", function () {
+		stroke.value;
 	});
-	
-	
 
-	//function changeColor (event) {
-      //  colorName = event.target.getAttribute('id')
-        //ctx.strokeStyle = colorName
-        //console.log(colorName)
-        
-    
-})
+	rainbowColor.addEventListener("click", rainbowColorFunction);
 
-const colours = ['#007892','#9d65c9','#ff427f', '#fc8210','yellow']
-	
-	for (const colour of colours) {
-		const colourDiv = document.createElement('li')
-		document.querySelector('ul').appendChild(colourDiv)
-		colourDiv.classList.add('colour')
-		colourDiv.style.backgroundColor = colour
-		colourDiv.addEventListener('click', changeColour)
-	  }
-
-	function changeColour () {
-		brushColour = this.style.backgroundColor
-	  }
-
-	  
+});
 
 
-    /*const colors = Array.from(document.querySelectorAll('.colors li'))
+
+
+
+
+
+
+
+
+
+
+
+
+/*const colors = Array.from(document.querySelectorAll('.colors li'))
 
 
     function loadColors () {
@@ -102,12 +120,10 @@ const colours = ['#007892','#9d65c9','#ff427f', '#fc8210','yellow']
             colorName = color.getAttribute('id')
             color.style.backgroundColor = colorName
         } )*/
-    
 
-	//loadColors()
-	
+//loadColors()
 
-	//window.addEventListener('resize, ');
+//window.addEventListener('resize, ');
 
 /*ctx.strokeStyle = "red";
     ctx.lineWidth = 5;
@@ -118,6 +134,3 @@ const colours = ['#007892','#9d65c9','#ff427f', '#fc8210','yellow']
 	ctx.moveTo(100, 100);
 	ctx.lineTo(100, 200);
 	ctx.stroke();*/
-
-
-    
