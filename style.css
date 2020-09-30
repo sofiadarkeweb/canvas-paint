@@ -1,38 +1,55 @@
 body {
 	margin: 0px;
+	position: relative;
 	padding: 0;
+	width: 100vw;
+	height: 100vh;
 	box-sizing: border-box;
-	background: #adefd1ff;
 	font-family: "Roboto", Helvetica, sans-serif;
 	overflow: hidden;
 }
 
+header {
+	/*font-family: 'Fredoka One', Arial, Helvetica, sans-serif;*/
+	position: absolute;
+	top: 20px;
+	left: 110px;
+	z-index: 1000;
+	font-size: 3em; /*moves cursor...?*/
+	font-weight: 900;
+	pointer-events: none;
+}
+
+main {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
 #canvas {
+	z-index: 10;
+	position: absolute;
+	width: 100%;
+	height: 100%;
 	border: none;
-	background-color: #adefd1ff;
+	background-color: #adefd1; /* */
 	margin: 0;
 	margin-top: 0px;
 	padding: 0;
 }
 
-.title {
-	/*font-family: 'Fredoka One', Arial, Helvetica, sans-serif;*/
-	font-size: 3em; /*moves cursor...?*/
-	font-weight: 900;
-	margin-left: 100px;
-	margin-top: 20px;
-	position: fixed;
-	pointer-events: none;
-}
-
-
-#colors {
+.leftnav {
+	z-index: 20;
 	position: absolute;
 	top: 0px;
 	left: 0px;
 	width: 80px;
-	height: 100vh;
+	height: 100%;
 	background: black;
+}
+
+.leftnav ul {
+	width: 100%;
 }
 
 .colour {
@@ -46,22 +63,36 @@ body {
 	cursor: pointer;
 }
 
-.magic {
+.extrabutton {
 	display: block;
 	position: absolute;
 	z-index: 100;
-	bottom: 0;
-	right: 0;
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
 	margin: 15px;
-	background-image: url("media/source.gif");
-	/*background-size: contain;*/
-	transform: rotateZ(45deg);
 	border: none;
 	outline: none;
 	cursor: pointer;
+}
+
+.magic {
+	background-image: url("media/source.gif");
+	right: 0;
+	bottom: 0;
+}
+
+.eraser {
+	position: fixed;
+	z-index: 500;
+	background: black;
+	color: pink;
+	right: 0px;
+	width: 50px;
+	height: 50px;
+	top: 60px;
+	font-size: 30px;
+	font-weight: 900;
 }
 
 .clear {
@@ -70,17 +101,11 @@ body {
 	z-index: 100;
 	top: 0;
 	right: 0;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	margin: 15px;
 	color: pink;
 	font-size: 20px;
 	font-weight: 900;
 	background-color: black;
-	border: none;
-	outline: none;
-	cursor: pointer;
+	
 }
 
 .line_width {
@@ -107,8 +132,8 @@ body {
 	display: inline-block;
 	width: 70px; /* Full-width */
 	height: 10px; /* Specified height */
-	bottom: 60px;
-	padding-left: -0;
+	bottom: 50px;
+	padding-left: 0;
 	transform: rotate(270deg);
 }
 
@@ -132,3 +157,4 @@ input[type="range"]::-webkit-slider-thumb {
 	background: rgb(77, 77, 77);
 	cursor: pointer;
 }
+

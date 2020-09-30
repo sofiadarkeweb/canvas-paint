@@ -4,11 +4,15 @@ window.addEventListener("load", () => {
 	const ctx = canvas.getContext("2d");
 	const strokeWeight = document.querySelector(".lineSlider");
 	let rainbowColor = document.querySelector(".magic");
+	let eraser = document.querySelector(".eraser");
+	const clearButton = document.querySelector(".clear");
 	let hue = 0;
 	let stroke = 0;
-	let brushColour, rainbowPressed;
+	let brushColour;
+	let rainbowPressed;
+	let painting = false;
 
-	//color divs
+	//Adding color divs
 	const colours = ["#007892", "#9d65c9", "#ff427f", "#fc8210", "yellow"];
 	const colourDivs = [];
 	for (const colour of colours) {
@@ -20,9 +24,9 @@ window.addEventListener("load", () => {
 		colourDivs.push(colourDiv);
 	}
 
+	//change colours function
 	function changeColour() {
 		rainbowPressed = false;
-		//window.removeEventListener('mousemove', increment)
 		brushColour = this.style.backgroundColor;
 	}
 
@@ -34,14 +38,13 @@ window.addEventListener("load", () => {
 	resizeCanvas();
 
 	//rainbow color
-	function rainbowColorFunction() {
+	function rainbowCreator() {
 		rainbowPressed = true;
 		ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-		window.addEventListener("mousemove", increment);
-		//colourDivs.forEach(div => div.removeEventListener('click', changeColour))
+		window.addEventListener("mousemove", incrementColor);
 	}
 
-	function increment() {
+	function incrementColor() {
 		ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
 		hue++;
 		if (hue >= 360) {
@@ -49,15 +52,19 @@ window.addEventListener("load", () => {
 		}
 	}
 
-	//clear canvas
+	//Clear canvas button
 	function clearCanvas() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 	}
 
-	//variables
-	let painting = false;
-	const clearButton = document.querySelector(".clear");
+	// ERASOR BUTTON
+	function eraseIt() {
+		console.log(this);
+		rainbowPressed = false;
+		brushColour = "#adefd1ff";
+	}
 
+	// THE DRAWING
 	function startPosition(e) {
 		painting = true;
 		draw(e);
@@ -65,13 +72,12 @@ window.addEventListener("load", () => {
 
 	function finishedPosition() {
 		painting = false;
-		ctx.closePath()
+		ctx.closePath();
 		ctx.beginPath();
 	}
 
 	function draw(e) {
-		//e.preventDefault()
-		console.log(e.type)
+		console.log(e.type);
 		if (!painting) return;
 		ctx.lineWidth = strokeWeight.value;
 		ctx.lineCap = "round";
@@ -94,26 +100,12 @@ window.addEventListener("load", () => {
 
 	window.addEventListener("resize", resizeCanvas);
 	clearButton.addEventListener("click", clearCanvas);
+	rainbowColor.addEventListener("click", rainbowCreator);
+	eraser.addEventListener("click", eraseIt);
 	strokeWeight.addEventListener("change", function () {
 		stroke.value;
 	});
-
-	rainbowColor.addEventListener("click", rainbowColorFunction);
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*const colors = Array.from(document.querySelectorAll('.colors li'))
 
